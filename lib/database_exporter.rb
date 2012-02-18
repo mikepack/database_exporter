@@ -10,5 +10,5 @@ class DatabaseExporter
     end
   end
 
-  def_delegators :@database, :export, :import, :copy
+  def_delegators :@database, :export, :import, :copy, :ensure_db_exists
 end
