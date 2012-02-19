@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe MysqlAdapter do
   context 'with a MySQL database' do
-    let(:adapter) { MysqlAdapter.new({"database"=>"some_mysql_db", "host"=>"localhost", "username"=>"root", "password"=>nil}) }
+    let(:adapter) { MysqlAdapter.new({:database => "some_mysql_db", :host => "localhost", :username => "root", :password => nil}) }
 
     describe '#export' do
       it 'ensures the database exists' do
@@ -52,16 +52,16 @@ describe MysqlAdapter do
     describe '#copy' do
       it 'executes the mysqldump and pipes to the mysql command' do
         Kernel.should_receive(:`).with(/mysqldump.*\|\s+mysql/)
-        adapter.copy({"database"=>"new_mysql_db", "host"=>"localhost", "username"=>"root", "password"=>nil})
+        adapter.copy({:database=>"new_mysql_db", :host=>"localhost", :username=>"root", :password=>nil})
       end
 
       it 'copies one database to another' do
         # Create a new table to check that it was duplicated to the new database
         adapter.import('CREATE TABLE some_new_database_table ( id INT );')
-        adapter.copy({"database"=>"new_mysql_db", "host"=>"localhost", "username"=>"root", "password"=>nil})
+        adapter.copy({:database=>"new_mysql_db", :host=>"localhost", :username=>"root", :password=>nil})
 
         # Load the new database and check that the table exists
-        new_adapter = MysqlAdapter.new({"database"=>"new_mysql_db", "host"=>"localhost", "username"=>"root", "password"=>nil})
+        new_adapter = MysqlAdapter.new({:database=>"new_mysql_db", :host=>"localhost", :username=>"root", :password=>nil})
         new_adapter.export.should =~ /some_new_database_table/
 
         `echo "DROP DATABASE some_mysql_db" | mysql -u root`

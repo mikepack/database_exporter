@@ -5,7 +5,7 @@ class DatabaseExporter
   extend Forwardable
 
   def initialize(config)
-    @adapter = case config['adapter']
+    @adapter = case config[:adapter]
     when /mysql/
       MysqlAdapter.new(config)
     end
