@@ -1,4 +1,5 @@
 require 'forwardable'
+require 'adapters/mysql_adapter'
 
 class DatabaseExporter
   extend Forwardable
