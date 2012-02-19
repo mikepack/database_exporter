@@ -5,7 +5,7 @@ require 'bundler'
 
 Gem::Specification.new do |s|
   s.name        = "database_exporter"
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Mike Pack"]
   s.email       = ["mikepackdev@gmail.com"]
